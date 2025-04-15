@@ -1,0 +1,54 @@
+﻿@page
+@model OdontoApp.Pages.Pacientes.CreateModel
+@{
+	Layout = "_LayoutApp";
+	ViewData["Title"] = "Nuevo Paciente";
+}
+<div class="container mt-4">
+    <h2 class="mb-4">Registrar Nuevo Paciente</h2>
+
+    <form method="post">
+        <div class="row g-3">
+            <div class="col-md-6">
+                <label asp-for="Paciente.Documento" class="form-label"></label>
+                <input asp-for="Paciente.Documento" class="form-control" />
+                <span asp-validation-for="Paciente.Documento" class="text-danger"></span>
+            </div>
+            <div class="col-md-6"></div>
+            <div class="col-md-6">
+                <label asp-for="Paciente.Nombre" class="form-label"></label>
+                <input asp-for="Paciente.Nombre" class="form-control" />
+                <span asp-validation-for="Paciente.Nombre" class="text-danger"></span>
+            </div>
+            <div class="col-md-6">
+                <label asp-for="Paciente.Apellido" class="form-label"></label>
+                <input asp-for="Paciente.Apellido" class="form-control" />
+                <span asp-validation-for="Paciente.Apellido" class="text-danger"></span>
+            </div>
+            <div class="col-md-6">
+                <label asp-for="Paciente.FechaNacimiento" class="form-label"></label>
+                <input asp-for="Paciente.FechaNacimiento" class="form-control" />
+                <span asp-validation-for="Paciente.FechaNacimiento" class="text-danger"></span>
+            </div>
+            <div class="col-md-6">
+                <label asp-for="Paciente.Sexo" class="form-label"></label>
+                <select asp-for="Paciente.Sexo" class="form-control">
+                    <option value="">Seleccione...</option>
+                    <option>Masculino</option>
+                    <option>Femenino</option>
+                    <option>Otro</option>
+                </select>
+                <span asp-validation-for="Paciente.Sexo" class="text-danger"></span>
+            </div>
+            
+            <div class="col-12">
+                <label asp-for="Paciente.Observaciones" class="form-label"></label>
+                <textarea asp-for="Paciente.Observaciones" class="form-control"></textarea>
+                <span asp-validation-for="Paciente.Observaciones" class="text-danger"></span>
+            </div>
+           
+        </div>
+        <button type="submit" class="btn btn-success mt-4">Guardar</button>
+        <a asp-page="Index" class="btn btn-secondary mt-4 ms-2">Cancelar</a>
+    </form>
+</div>

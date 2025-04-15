@@ -1,0 +1,31 @@
+﻿@page
+@model OdontoApp.Pages.Account.LoginModel
+@{
+ 
+    Layout = "_LayoutLogin"; // 👈 Esto le dice que NO use el layout principal
+    ViewData["Title"] = "Login";
+}
+
+<div class="d-flex justify-content-center align-items-center min-vh-100 bg-light">
+    <div class="card shadow-lg p-4 rounded-4" style="width: 100%; max-width: 400px;">
+        <div class="text-center mb-4">
+            <h2 class="fw-bold">Iniciar sesión</h2>
+        </div>
+        <form method="post">
+            <div class="mb-3">
+                <label for="usuario" class="form-label">Usuario</label>
+                <input type="text" class="form-control rounded-3" id="usuario" name="usuario" placeholder="Tu usuario" required>
+            </div>
+            <div class="mb-4">
+                <label for="clave" class="form-label">Contraseña</label>
+                <input type="password" class="form-control rounded-3" id="clave" name="clave" placeholder="Tu contraseña" required>
+            </div>
+            <div class="d-grid">
+                <button type="submit" class="btn btn-primary rounded-3 fw-semibold">Entrar</button>
+            </div>
+        </form>
+        <div class="text-center mt-3">
+            <a href="#">¿Olvidaste tu contraseña?</a>
+        </div>
+    </div>
+</div>

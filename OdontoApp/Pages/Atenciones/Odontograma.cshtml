@@ -1,0 +1,435 @@
+﻿@page "{tipo=Permanente}" 
+@model OdontoApp.Pages.Atenciones.OdontogramaModel
+@using OdontoApp.Model.Odontograma
+@using System.Text.Json
+@{
+    Layout = "_LayoutApp";
+    ViewData["Title"] = "Odontograma";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4">Odontograma Interactivo</h2>
+
+    <div>
+        <h5>Paciente: @Model.Paciente?.Nombre @Model.Paciente?.Apellido</h5>
+        <p><strong>Documento:</strong> @Model.Paciente?.Documento</p>
+    </div>
+
+    @if (Model.MaestroDientes != null && Model.MaestroDientes.Any())
+    {
+        var dientesFila1 = Model.MaestroDientes.Where(d => d.Fila == 1).OrderBy(d => d.Orden);
+        var dientesFila2 = Model.MaestroDientes.Where(d => d.Fila == 2).OrderBy(d => d.Orden);
+        <div class="mb-4 text-end">
+            <!-- ✅ Fecha y botón guardar -->
+            <input type="date" id="fechaOdontograma" class="form-control d-inline-block w-auto me-2"
+                   value="@Model.Fecha" />
+            <button id="btn-guardar" class="btn btn-success">Guardar Odontograma</button>
+        </div>
+
+        <div class="mb-2 text-end">
+            <button id="btn-limpiar" class="btn btn-danger mt-3">Limpiar selección</button>
+        </div>
+        <div class="mb-4">
+            
+            <div class="odontograma-scroll">
+                @foreach (var diente in dientesFila1)
+                {
+                    <div class="text-center diente-container" data-etiqueta="@diente.Etiqueta" data-fila="@diente.Fila" title="@Model.ObtenerNombreTipo(diente.IdTipoDiente)">
+                        <div class="img-overlay-top"></div>
+                        <canvas class="diente-canvas" width="60" height="60" data-etiqueta="@diente.Etiqueta"></canvas>
+                        <h6 class="etiqueta-clickable">[@diente.Etiqueta]</h6>
+                    </div>
+                }
+            </div>
+        </div>
+
+
+        <div class="mb-4">
+            
+            <div class="odontograma-scroll">
+                @foreach (var diente in dientesFila2)
+                {
+                    <div class="text-center diente-container" data-etiqueta="@diente.Etiqueta" data-fila="@diente.Fila" title="@Model.ObtenerNombreTipo(diente.IdTipoDiente)">
+                        <h6 class="etiqueta-clickable">[@diente.Etiqueta]</h6>
+                        <canvas class="diente-canvas" width="60" height="60" data-etiqueta="@diente.Etiqueta"></canvas>
+                        <div class="img-overlay-bottom"></div>
+                    </div>
+                }
+            </div>
+        </div>
+
+
+        <div class="mb-4">
+            <h5>Leyenda</h5>
+            <div class="odontograma-scroll flex-wrap">
+                @foreach (var item in Model.ImagenesEtiquetas)
+                {
+                    <div class="leyenda-item "  >
+                        <input type="radio" name="leyenda" id="leyenda_@item.Icon" hidden />
+                        <label for="leyenda_@item.Icon" class="leyenda-icono">
+                            <img src="@($"/img/iconos/{item.Icon}.png")" width="30" height="30" alt="@item.Texto" />
+                            <div class="leyenda-texto">@item.Texto</div>
+                        </label>
+                    </div>
+                }
+            </div>
+        </div>
+        
+
+
+    }
+    else
+    {
+        <div class="alert alert-warning mt-4">No hay datos de piezas para el tipo seleccionado.</div>
+    }
+</div>
+
+<script>
+    document.querySelectorAll('.diente-canvas').forEach(canvas => {
+        const ctx = canvas.getContext('2d');
+        const centerX = canvas.width / 2;
+        const centerY = canvas.height / 2;
+        const radius = 28;
+        const innerRadius = 14;
+
+        const estados = {
+            centro: 0,
+            mesial: 0,
+            distal: 0,
+            lingual: 0,
+            vestibular: 0
+        };
+
+        function obtenerColor(estado) {
+            if (estado === 1) return 'blue';
+            if (estado === 2) return 'red';
+            return 'white';
+        }
+
+        function drawDiente() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            canvas.estados = estados;
+            const secciones = [
+                { key: 'vestibular', start: -45, end: 45 },
+                { key: 'distal', start: 45, end: 135 },
+                { key: 'lingual', start: 135, end: 225 },
+                { key: 'mesial', start: 225, end: 315 }
+            ];
+
+            secciones.forEach(sec => {
+                const startRad = (Math.PI / 180) * sec.start;
+                const endRad = (Math.PI / 180) * sec.end;
+                ctx.beginPath();
+                ctx.moveTo(centerX, centerY);
+                ctx.fillStyle = obtenerColor(estados[sec.key]);
+                ctx.arc(centerX, centerY, radius, startRad, endRad);
+                ctx.closePath();
+                ctx.fill();
+            });
+
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, innerRadius, 0, 2 * Math.PI);
+            ctx.fillStyle = obtenerColor(estados.centro);
+            ctx.fill();
+            ctx.stroke();
+
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI);
+            ctx.strokeStyle = 'black';
+            ctx.lineWidth = 2;
+            ctx.stroke();
+
+            ctx.save();
+            ctx.translate(centerX, centerY);
+            ctx.rotate(Math.PI / 4);
+            ctx.translate(-centerX, -centerY);
+
+            const lineas = [0, 90, 180, 270];
+            lineas.forEach(grados => {
+                const rad = (Math.PI / 180) * grados;
+                const x1 = centerX + Math.cos(rad) * radius;
+                const y1 = centerY + Math.sin(rad) * radius;
+                const x2 = centerX + Math.cos(rad) * innerRadius;
+                const y2 = centerY + Math.sin(rad) * innerRadius;
+                ctx.beginPath();
+                ctx.moveTo(x1, y1);
+                ctx.lineTo(x2, y2);
+                ctx.stroke();
+            });
+
+            ctx.restore();
+        }
+
+        drawDiente();
+
+        canvas.addEventListener('click', (e) => {
+            const rect = canvas.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            const dx = x - centerX;
+            const dy = y - centerY;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+
+            if (dist < innerRadius) {
+                estados.centro = (estados.centro + 1) % 3;
+            } else if (dist < radius) {
+                const angle = (Math.atan2(dy, dx) * 180 / Math.PI + 360) % 360;
+                if (angle >= 315 || angle < 45) estados.vestibular = (estados.vestibular + 1) % 3;
+                else if (angle >= 45 && angle < 135) estados.distal = (estados.distal + 1) % 3;
+                else if (angle >= 135 && angle < 225) estados.lingual = (estados.lingual + 1) % 3;
+                else if (angle >= 225 && angle < 315) estados.mesial = (estados.mesial + 1) % 3;
+            }
+            drawDiente();
+        });
+    });
+
+    // Toggle de selección de etiquetas
+    document.querySelectorAll('.etiqueta-clickable').forEach(label => {
+        label.addEventListener('click', () => {
+            label.classList.toggle('selected-label');
+        });
+    });
+
+        let dientesSeleccionados = [];
+
+    // Click sobre número de diente
+    document.querySelectorAll('.etiqueta-clickable').forEach(et => {
+        et.addEventListener('click', () => {
+            const etiqueta = et.innerText.replace(/\[|\]/g, '');
+            et.classList.toggle('seleccionado');
+            if (dientesSeleccionados.includes(etiqueta)) {
+                dientesSeleccionados = dientesSeleccionados.filter(e => e !== etiqueta);
+            } else {
+                dientesSeleccionados.push(etiqueta);
+            }
+        });
+    });
+
+    // Click en leyenda (icono)
+    document.querySelectorAll('.leyenda-icono').forEach(icono => {
+        icono.addEventListener('click', () => {
+            const img = icono.querySelector('img');
+            const iconSrc = img.getAttribute('src');
+
+            dientesSeleccionados.forEach(etiqueta => {
+                const contenedor = document.querySelector(`.diente-container[data-etiqueta='${etiqueta}']`);
+                if (contenedor) {
+                    const fila = parseInt(contenedor.dataset.fila);
+                    const zona = contenedor.querySelector(fila === 1 ? '.img-overlay-top' : '.img-overlay-bottom');
+
+                    const yaExiste = [...zona.querySelectorAll('img')].some(el => el.src.includes(iconSrc));
+                    if (yaExiste) {
+                        zona.querySelectorAll('img').forEach(el => {
+                            if (el.src.includes(iconSrc)) el.remove();
+                        });
+                    } else {
+                        const mini = document.createElement('img');
+                        mini.src = iconSrc;
+                        mini.width = 18;
+                        mini.height = 18;
+                        mini.classList.add('me-1');
+                        zona.appendChild(mini);
+                    }
+                }
+            });
+        });
+    });
+
+    // Limpiar selección
+    document.getElementById('btn-limpiar').addEventListener('click', () => {
+        dientesSeleccionados = [];
+        document.querySelectorAll('.etiqueta-clickable').forEach(et => {
+            et.classList.remove('seleccionado');
+        });
+    });
+    ///Guardar odonto
+      document.getElementById('btn-guardar').addEventListener('click', () => {
+        const fecha = document.getElementById('fechaOdontograma').value;
+        if (!fecha) {
+            alert("Debes ingresar una fecha");
+            return;
+        }
+        
+        const documento = "@Model.Paciente?.Documento";
+        const piezas = [];
+       
+        document.querySelectorAll('.diente-container').forEach(div => {
+            const etiqueta = div.dataset.etiqueta;
+            const fila = parseInt(div.dataset.fila);
+
+            const iconos = [...div.querySelectorAll('.img-overlay-top img, .img-overlay-bottom img')]
+                .map(img => img.src.split('/').pop().replace('.png', ''));
+
+            const canvas = div.querySelector('canvas');
+            const estados = canvas?.estados || {};
+ 
+            if (iconos.length > 0 || Object.keys(estados).length > 0) {
+                piezas.push({
+                    etiqueta,
+                    fila,
+                    iconos,
+                    partes: {
+                        superiorIzquierda: estados.mesial ?? 0,
+                        superiorDerecha: estados.distal ?? 0,
+                        inferiorIzquierda: estados.lingual ?? 0,
+                        inferiorDerecha: estados.vestibular ?? 0,
+                        central: estados.centro ?? 0
+                    }
+                });
+            }
+        });
+         alert(fecha);
+           fetch('/Atenciones/Odontograma?handler=Guardar', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            documento: documento,
+            odontograma: {
+                fecha: fecha,
+                piezas: piezas
+            }
+            })
+        })
+        .then(res => {
+            if (!res.ok) throw new Error("No se pudo guardar");
+            return res.json();
+        })
+        .then(data => {
+            alert("Odontograma guardado con éxito");
+        })
+        .catch(async err => {
+            if (err instanceof Response) {
+                const text = await err.text();
+                alert("❌ Error HTTP: " + text);
+            } else {
+                alert("⚠️ Error JS: " + err.message);
+            }
+        });
+    });
+
+     const datosOdontograma = @Html.Raw(JsonSerializer.Serialize(Model.OdontogramaCargado ?? new OdontoApp.Model.Odontograma.OdontogramaEntrada
+                         {
+                             Fecha = "",
+                             Piezas = new List<OdontoApp.Model.Odontograma.PiezaOdontograma>()
+                         }));
+
+        if (datosOdontograma && datosOdontograma.piezas) {
+        datosOdontograma.piezas.forEach(p => {
+            const contenedor = document.querySelector(`.diente-container[data-etiqueta='${p.etiqueta}']`);
+            if (contenedor) {
+                const canvas = contenedor.querySelector('canvas');
+                canvas.estados = {
+                    centro: p.partes && p.partes.central || 0,
+                    mesial: p.partes && p.partes.superiorIzquierda || 0,
+                    distal: p.partes && p.partes.superiorDerecha || 0,
+                    lingual: p.partes && p.partes.inferiorIzquierda || 0,
+                    vestibular: p.partes && p.partes.inferiorDerecha || 0
+                };
+
+                // Forzamos repintar el diente (si tienes función drawDiente(canvas) puedes llamarla aquí)
+                canvas.click();
+
+                const zona = contenedor.querySelector(p.fila == 1 ? '.img-overlay-top' : '.img-overlay-bottom');
+                p.iconos.forEach(icon => {
+                    const mini = document.createElement('img');
+                    mini.src = `/img/iconos/${icon}.png`;
+                    mini.width = 18;
+                    mini.height = 18;
+                    mini.classList.add('me-1');
+                    zona.appendChild(mini);
+                });
+            }
+        });
+    }
+</script>
+
+<style>
+    .diente-canvas {
+        border-radius: 50%;
+        border: 2px solid transparent;
+        transition: transform 0.2s ease;
+    }
+
+        .diente-canvas:hover {
+            transform: scale(1.05);
+            cursor: pointer;
+        }
+
+    .odontograma-scroll {
+        display: flex;
+        gap: 1rem;
+        overflow-x: auto;
+        padding: 1rem;
+        background-color: #f8f9fa;
+        border-radius: 0.5rem;
+        justify-content: start;
+        flex-wrap: nowrap;
+    }
+
+    .etiqueta-clickable {
+        cursor: pointer;
+        padding: 4px 6px;
+        border-radius: 4px;
+        transition: background-color 0.3s ease;
+    }
+
+    .selected-label {
+        background-color: #d1ecf1;
+    }
+
+    .leyenda-item {
+        margin: 0.5rem;
+    }
+
+    .leyenda-label {
+        display: inline-block;
+        padding: 4px 8px;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-radius: 20px;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+
+    .leyenda-label:hover {
+        background-color: #e2e6ea;
+    }
+
+    .leyenda-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin: 10px;
+        width: 90px;
+        text-align: center;
+    }
+
+    .img-overlay-top,
+    .img-overlay-bottom {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        min-height: 20px;
+        margin: 2px 0;
+    }
+
+    .etiqueta-clickable.seleccionado {
+        background-color: #cce5ff;
+        border-radius: 4px;
+        padding: 2px 6px;
+    }
+
+    .etiqueta-clickable {
+        cursor: pointer;
+        padding: 4px 6px;
+        border-radius: 4px;
+        transition: background-color 0.3s ease;
+        background-color: transparent !important;
+    }
+
+    .etiqueta-clickable.seleccionado {
+        background-color: #cce5ff !important;
+    }
+
+</style>

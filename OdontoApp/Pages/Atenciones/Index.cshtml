@@ -1,0 +1,72 @@
+﻿@page
+@model OdontoApp.Pages.Atenciones.IndexModel
+@{
+    Layout = "_LayoutApp";
+    ViewData["Title"] = "Atenciones";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4">Buscar paciente por DNI</h2>
+
+    <form method="post" class="row g-3">
+        <div class="col-md-6">
+            <label for="dni" class="form-label">Documento (DNI)</label>
+            <input asp-for="DocumentoBuscado" class="form-control" placeholder="Ingrese DNI del paciente" />
+        </div>
+        <div class="col-md-3 align-self-end">
+            <button type="submit" class="btn btn-primary">Buscar</button>
+        </div>
+    </form>
+
+    @if (Model.PacienteEncontrado != null)
+    {
+        <hr />
+        <h4>Paciente encontrado:</h4>
+        <table class="table table-bordered w-auto">
+            <tbody>
+                <tr>
+                    <th>Nombre</th>
+                    <td>@Model.PacienteEncontrado.Nombre @Model.PacienteEncontrado.Apellido</td>
+                </tr>
+                <tr>
+                    <th>Documento</th>
+                    <td>@Model.PacienteEncontrado.Documento</td>
+                </tr>
+                <tr>
+                    <th>Sexo</th>
+                    <td>@Model.PacienteEncontrado.Sexo</td>
+                </tr>
+                <tr>
+                    <th>Fecha de Nacimiento</th>
+                    <td>@Model.PacienteEncontrado.FechaNacimiento.ToShortDateString()</td>
+                </tr>
+            </tbody>
+        </table>
+        @if (Model.OdontogramasDelPaciente.Any())
+        {
+            <h5 class="mt-4">Odontogramas guardados:</h5>
+            <ul class="list-group mb-4">
+                @foreach (var odo in Model.OdontogramasDelPaciente)
+                {
+                    <li class="list-group-item">
+                        Fecha: <strong>@odo.Fecha</strong> - <span>@odo.Piezas.Count() pieza(s)</span>
+                        <a class="btn btn-sm btn-outline-primary ms-2"
+                           asp-page="Odontograma"
+                           asp-route-documento="@Model.PacienteEncontrado.Documento"
+                           asp-route-fecha="@odo.Fecha"
+                           target="_blank">
+                            Ver
+                        </a>
+                    </li>
+                }
+            </ul>
+        }
+        <a asp-page="Odontograma" asp-route-documento="@Model.PacienteEncontrado.Documento" class="btn btn-success mt-2">
+            Agregar Odontograma
+        </a>
+    }
+    else if (Model.MetodoHttp == "POST")
+    {
+        <div class="alert alert-warning mt-4">No se encontró ningún paciente con ese documento.</div>
+    }
+</div>

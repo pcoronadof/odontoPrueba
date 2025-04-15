@@ -1,0 +1,13 @@
+D:\proyectoPersonal\OdontoApp\OdontoApp.Model\bin\Debug\net6.0\OdontoApp.Model.deps.json
+D:\proyectoPersonal\OdontoApp\OdontoApp.Model\bin\Debug\net6.0\OdontoApp.Model.dll
+D:\proyectoPersonal\OdontoApp\OdontoApp.Model\bin\Debug\net6.0\OdontoApp.Model.pdb
+D:\proyectoPersonal\OdontoApp\OdontoApp.Model\obj\Debug\net6.0\OdontoApp.Model.csproj.AssemblyReference.cache
+D:\proyectoPersonal\OdontoApp\OdontoApp.Model\obj\Debug\net6.0\OdontoApp.Model.GeneratedMSBuildEditorConfig.editorconfig
+D:\proyectoPersonal\OdontoApp\OdontoApp.Model\obj\Debug\net6.0\OdontoApp.Model.AssemblyInfoInputs.cache
+D:\proyectoPersonal\OdontoApp\OdontoApp.Model\obj\Debug\net6.0\OdontoApp.Model.AssemblyInfo.cs
+D:\proyectoPersonal\OdontoApp\OdontoApp.Model\obj\Debug\net6.0\OdontoApp.Model.csproj.CoreCompileInputs.cache
+D:\proyectoPersonal\OdontoApp\OdontoApp.Model\obj\Debug\net6.0\OdontoApp.Model.sourcelink.json
+D:\proyectoPersonal\OdontoApp\OdontoApp.Model\obj\Debug\net6.0\OdontoApp.Model.dll
+D:\proyectoPersonal\OdontoApp\OdontoApp.Model\obj\Debug\net6.0\refint\OdontoApp.Model.dll
+D:\proyectoPersonal\OdontoApp\OdontoApp.Model\obj\Debug\net6.0\OdontoApp.Model.pdb
+D:\proyectoPersonal\OdontoApp\OdontoApp.Model\obj\Debug\net6.0\ref\OdontoApp.Model.dll

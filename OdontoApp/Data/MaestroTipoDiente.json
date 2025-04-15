@@ -1,0 +1,37 @@
+{
+    "TipoDiente": [
+        {
+            "Id": 1,
+            "Nombre": "Incisivo central"
+        },
+        {
+            "Id": 2,
+            "Nombre": "Incisivo lateral"
+        },
+        {
+            "Id": 3,
+            "Nombre": "Canino"
+        },
+        {
+            "Id": 4,
+            "Nombre": "Primer premolar"
+        },
+        {
+            "Id": 5,
+            "Nombre": "Segundo premolar"
+        },
+        {
+            "Id": 6,
+            "Nombre": "Primer molar"
+        },
+        {
+            "Id": 7,
+            "Nombre": "Segundo molar"
+        },
+        {
+            "Id": 8,
+            "Nombre": "Tercer molar"
+        }
+
+    ]
+}
