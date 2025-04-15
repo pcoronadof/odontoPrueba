@@ -3,6 +3,14 @@
   "WorkspaceRootPath": "D:\\proyectoPersonal\\OdontoApp\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{1AEAABEC-D757-4771-9927-8915C1CB045E}|OdontoApp\\OdontoApp.csproj|d:\\proyectopersonal\\odontoapp\\odontoapp\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1AEAABEC-D757-4771-9927-8915C1CB045E}|OdontoApp\\OdontoApp.csproj|solutionrelative:odontoapp\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1AEAABEC-D757-4771-9927-8915C1CB045E}|OdontoApp\\OdontoApp.csproj|d:\\proyectopersonal\\odontoapp\\odontoapp\\wwwroot\\lib\\bootstrap\\readme.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}",
+      "RelativeMoniker": "D:0:0:{1AEAABEC-D757-4771-9927-8915C1CB045E}|OdontoApp\\OdontoApp.csproj|solutionrelative:odontoapp\\wwwroot\\lib\\bootstrap\\readme.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{16589897-4CD9-4B13-B3ED-D8FFCD72751E}|OdontoApp.Model\\OdontoApp.Model.csproj|d:\\proyectopersonal\\odontoapp\\odontoapp.model\\odontoapp.model.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
       "RelativeMoniker": "D:0:0:{16589897-4CD9-4B13-B3ED-D8FFCD72751E}|OdontoApp.Model\\OdontoApp.Model.csproj|solutionrelative:odontoapp.model\\odontoapp.model.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     },
@@ -35,45 +43,68 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "OdontoApp.Model",
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\proyectoPersonal\\OdontoApp\\OdontoApp\\Program.cs",
+              "RelativeDocumentMoniker": "OdontoApp\\Program.cs",
+              "ToolTip": "D:\\proyectoPersonal\\OdontoApp\\OdontoApp\\Program.cs",
+              "RelativeToolTip": "OdontoApp\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-15T03:02:18.736Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "readme.md",
+              "DocumentMoniker": "D:\\proyectoPersonal\\OdontoApp\\OdontoApp\\wwwroot\\lib\\bootstrap\\readme.md",
+              "RelativeDocumentMoniker": "OdontoApp\\wwwroot\\lib\\bootstrap\\readme.md",
+              "ToolTip": "D:\\proyectoPersonal\\OdontoApp\\OdontoApp\\wwwroot\\lib\\bootstrap\\readme.md",
+              "RelativeToolTip": "OdontoApp\\wwwroot\\lib\\bootstrap\\readme.md",
+              "ViewState": "AgIAADIAAAAAAAAAAAAmwEEAAABiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
+              "WhenOpened": "2025-04-15T02:54:37.367Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "OdontoApp.Model.csproj",
               "DocumentMoniker": "D:\\proyectoPersonal\\OdontoApp\\OdontoApp.Model\\OdontoApp.Model.csproj",
               "RelativeDocumentMoniker": "OdontoApp.Model\\OdontoApp.Model.csproj",
               "ToolTip": "D:\\proyectoPersonal\\OdontoApp\\OdontoApp.Model\\OdontoApp.Model.csproj",
               "RelativeToolTip": "OdontoApp.Model\\OdontoApp.Model.csproj",
               "ViewState": "AgIAAAMAAAAAAAAAAAAAAAMAAAAsAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-04-15T02:28:29.462Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-15T02:28:29.462Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "OdontoApp",
+              "DocumentIndex": 3,
+              "Title": "OdontoApp.csproj",
               "DocumentMoniker": "D:\\proyectoPersonal\\OdontoApp\\OdontoApp\\OdontoApp.csproj",
               "RelativeDocumentMoniker": "OdontoApp\\OdontoApp.csproj",
               "ToolTip": "D:\\proyectoPersonal\\OdontoApp\\OdontoApp\\OdontoApp.csproj",
               "RelativeToolTip": "OdontoApp\\OdontoApp.csproj",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAsAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-04-15T02:28:27.209Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-15T02:28:27.209Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "OdontoApp.Datos",
+              "DocumentIndex": 4,
+              "Title": "OdontoApp.Datos.csproj",
               "DocumentMoniker": "D:\\proyectoPersonal\\OdontoApp\\OdontoApp.Datos\\OdontoApp.Datos.csproj",
               "RelativeDocumentMoniker": "OdontoApp.Datos\\OdontoApp.Datos.csproj",
               "ToolTip": "D:\\proyectoPersonal\\OdontoApp\\OdontoApp.Datos\\OdontoApp.Datos.csproj",
               "RelativeToolTip": "OdontoApp.Datos\\OdontoApp.Datos.csproj",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAsAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-04-15T02:28:23.381Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-15T02:28:23.381Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 5,
               "Title": "ApplicationDbContext.cs",
               "DocumentMoniker": "D:\\proyectoPersonal\\OdontoApp\\OdontoApp.Datos\\ApplicationDbContext.cs",
               "RelativeDocumentMoniker": "OdontoApp.Datos\\ApplicationDbContext.cs",
@@ -81,20 +112,18 @@
               "RelativeToolTip": "OdontoApp.Datos\\ApplicationDbContext.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-15T01:59:31.554Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-15T01:59:31.554Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 6,
               "Title": "OdontoApp.Datos",
               "DocumentMoniker": "D:\\proyectoPersonal\\OdontoApp\\OdontoApp.Datos\\OdontoApp.Datos.csproj",
               "RelativeDocumentMoniker": "OdontoApp.Datos\\OdontoApp.Datos.csproj",
               "ToolTip": "D:\\proyectoPersonal\\OdontoApp\\OdontoApp.Datos\\OdontoApp.Datos.csproj",
               "RelativeToolTip": "OdontoApp.Datos\\OdontoApp.Datos.csproj",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-04-15T01:52:21.049Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-15T01:52:21.049Z"
             }
           ]
         }
